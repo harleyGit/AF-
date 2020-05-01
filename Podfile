@@ -9,7 +9,7 @@ target 'AFNetworkInterpret' do
   use_frameworks!
   
   # 针对AFNetworkInterpret target引入AFNetworking
-	pod 'AFNetworking', '~> 4.0.1'
+	#pod 'AFNetworking', '4.0.1'
 	
 
   # Pods for AFNetworkInterpret

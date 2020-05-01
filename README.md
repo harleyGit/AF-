@@ -1,4 +1,5 @@
 # AFNetwork的源码分析和解读
+#pod 'AFNetworking', '4.0.1'
 
 AFNetworking主要是对NSURLSession和NSURLConnection(iOS9.0废弃)的封装,其中主要有以下类:
 

@@ -7,112 +7,85 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		62F4750E76EA0E5EB706B0D0 /* Pods_AFNetworkInterpret.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03CB12E08357D0764F4E36C5 /* Pods_AFNetworkInterpret.framework */; };
-		6E58A129245C256100AFC284 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E58A128245C256100AFC284 /* AppDelegate.m */; };
-		6E58A12C245C256100AFC284 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E58A12B245C256100AFC284 /* SceneDelegate.m */; };
-		6E58A12F245C256100AFC284 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E58A12E245C256100AFC284 /* ViewController.m */; };
-		6E58A132245C256100AFC284 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E58A130245C256100AFC284 /* Main.storyboard */; };
-		6E58A134245C256200AFC284 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E58A133245C256200AFC284 /* Assets.xcassets */; };
-		6E58A137245C256200AFC284 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E58A135245C256200AFC284 /* LaunchScreen.storyboard */; };
-		6E58A13A245C256200AFC284 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E58A139245C256200AFC284 /* main.m */; };
+		6EFB5B71245C5EA100D9AF67 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EFB5B70245C5EA100D9AF67 /* AppDelegate.m */; };
+		6EFB5B74245C5EA100D9AF67 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EFB5B73245C5EA100D9AF67 /* SceneDelegate.m */; };
+		6EFB5B77245C5EA100D9AF67 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EFB5B76245C5EA100D9AF67 /* ViewController.m */; };
+		6EFB5B7A245C5EA100D9AF67 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EFB5B78245C5EA100D9AF67 /* Main.storyboard */; };
+		6EFB5B7C245C5EA300D9AF67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EFB5B7B245C5EA300D9AF67 /* Assets.xcassets */; };
+		6EFB5B7F245C5EA300D9AF67 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EFB5B7D245C5EA300D9AF67 /* LaunchScreen.storyboard */; };
+		6EFB5B82245C5EA300D9AF67 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EFB5B81245C5EA300D9AF67 /* main.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		01AEF893A1605DD5419B286F /* Pods-AFNetworkInterpret.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AFNetworkInterpret.release.xcconfig"; path = "Target Support Files/Pods-AFNetworkInterpret/Pods-AFNetworkInterpret.release.xcconfig"; sourceTree = "<group>"; };
-		03CB12E08357D0764F4E36C5 /* Pods_AFNetworkInterpret.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AFNetworkInterpret.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6E58A124245C256100AFC284 /* AFNetworkInterpret.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AFNetworkInterpret.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		6E58A127245C256100AFC284 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		6E58A128245C256100AFC284 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		6E58A12A245C256100AFC284 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
-		6E58A12B245C256100AFC284 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
-		6E58A12D245C256100AFC284 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		6E58A12E245C256100AFC284 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		6E58A131245C256100AFC284 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		6E58A133245C256200AFC284 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		6E58A136245C256200AFC284 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		6E58A138245C256200AFC284 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6E58A139245C256200AFC284 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		FF0CE217B2F6301B74854F27 /* Pods-AFNetworkInterpret.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AFNetworkInterpret.debug.xcconfig"; path = "Target Support Files/Pods-AFNetworkInterpret/Pods-AFNetworkInterpret.debug.xcconfig"; sourceTree = "<group>"; };
+		6EFB5B6C245C5EA100D9AF67 /* AFNetworkInterpret.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AFNetworkInterpret.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6EFB5B6F245C5EA100D9AF67 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		6EFB5B70245C5EA100D9AF67 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		6EFB5B72245C5EA100D9AF67 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		6EFB5B73245C5EA100D9AF67 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		6EFB5B75245C5EA100D9AF67 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		6EFB5B76245C5EA100D9AF67 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		6EFB5B79245C5EA100D9AF67 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6EFB5B7B245C5EA300D9AF67 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6EFB5B7E245C5EA300D9AF67 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6EFB5B80245C5EA300D9AF67 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6EFB5B81245C5EA300D9AF67 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		6E58A121245C256100AFC284 /* Frameworks */ = {
+		6EFB5B69245C5EA100D9AF67 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				62F4750E76EA0E5EB706B0D0 /* Pods_AFNetworkInterpret.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6E58A11B245C256100AFC284 = {
+		6EFB5B63245C5EA100D9AF67 = {
 			isa = PBXGroup;
 			children = (
-				6E58A126245C256100AFC284 /* AFNetworkInterpret */,
-				6E58A125245C256100AFC284 /* Products */,
-				F207575D0CD9CAEA30ED425B /* Pods */,
-				CDB9E373F8EFC2B6033B3D52 /* Frameworks */,
+				6EFB5B6E245C5EA100D9AF67 /* AFNetworkInterpret */,
+				6EFB5B6D245C5EA100D9AF67 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		6E58A125245C256100AFC284 /* Products */ = {
+		6EFB5B6D245C5EA100D9AF67 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6E58A124245C256100AFC284 /* AFNetworkInterpret.app */,
+				6EFB5B6C245C5EA100D9AF67 /* AFNetworkInterpret.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		6E58A126245C256100AFC284 /* AFNetworkInterpret */ = {
+		6EFB5B6E245C5EA100D9AF67 /* AFNetworkInterpret */ = {
 			isa = PBXGroup;
 			children = (
-				6E58A127245C256100AFC284 /* AppDelegate.h */,
-				6E58A128245C256100AFC284 /* AppDelegate.m */,
-				6E58A12A245C256100AFC284 /* SceneDelegate.h */,
-				6E58A12B245C256100AFC284 /* SceneDelegate.m */,
-				6E58A12D245C256100AFC284 /* ViewController.h */,
-				6E58A12E245C256100AFC284 /* ViewController.m */,
-				6E58A130245C256100AFC284 /* Main.storyboard */,
-				6E58A133245C256200AFC284 /* Assets.xcassets */,
-				6E58A135245C256200AFC284 /* LaunchScreen.storyboard */,
-				6E58A138245C256200AFC284 /* Info.plist */,
-				6E58A139245C256200AFC284 /* main.m */,
+				6EFB5B6F245C5EA100D9AF67 /* AppDelegate.h */,
+				6EFB5B70245C5EA100D9AF67 /* AppDelegate.m */,
+				6EFB5B72245C5EA100D9AF67 /* SceneDelegate.h */,
+				6EFB5B73245C5EA100D9AF67 /* SceneDelegate.m */,
+				6EFB5B75245C5EA100D9AF67 /* ViewController.h */,
+				6EFB5B76245C5EA100D9AF67 /* ViewController.m */,
+				6EFB5B78245C5EA100D9AF67 /* Main.storyboard */,
+				6EFB5B7B245C5EA300D9AF67 /* Assets.xcassets */,
+				6EFB5B7D245C5EA300D9AF67 /* LaunchScreen.storyboard */,
+				6EFB5B80245C5EA300D9AF67 /* Info.plist */,
+				6EFB5B81245C5EA300D9AF67 /* main.m */,
 			);
 			path = AFNetworkInterpret;
-			sourceTree = "<group>";
-		};
-		CDB9E373F8EFC2B6033B3D52 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				03CB12E08357D0764F4E36C5 /* Pods_AFNetworkInterpret.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		F207575D0CD9CAEA30ED425B /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				FF0CE217B2F6301B74854F27 /* Pods-AFNetworkInterpret.debug.xcconfig */,
-				01AEF893A1605DD5419B286F /* Pods-AFNetworkInterpret.release.xcconfig */,
-			);
-			name = Pods;
-			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6E58A123245C256100AFC284 /* AFNetworkInterpret */ = {
+		6EFB5B6B245C5EA100D9AF67 /* AFNetworkInterpret */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6E58A13D245C256200AFC284 /* Build configuration list for PBXNativeTarget "AFNetworkInterpret" */;
+			buildConfigurationList = 6EFB5B85245C5EA300D9AF67 /* Build configuration list for PBXNativeTarget "AFNetworkInterpret" */;
 			buildPhases = (
-				76E07E0E661967C6D9C177CB /* [CP] Check Pods Manifest.lock */,
-				6E58A120245C256100AFC284 /* Sources */,
-				6E58A121245C256100AFC284 /* Frameworks */,
-				6E58A122245C256100AFC284 /* Resources */,
-				92BD020F3B9920282C05A6D9 /* [CP] Embed Pods Frameworks */,
+				6EFB5B68245C5EA100D9AF67 /* Sources */,
+				6EFB5B69245C5EA100D9AF67 /* Frameworks */,
+				6EFB5B6A245C5EA100D9AF67 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -120,24 +93,24 @@
 			);
 			name = AFNetworkInterpret;
 			productName = AFNetworkInterpret;
-			productReference = 6E58A124245C256100AFC284 /* AFNetworkInterpret.app */;
+			productReference = 6EFB5B6C245C5EA100D9AF67 /* AFNetworkInterpret.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		6E58A11C245C256100AFC284 /* Project object */ = {
+		6EFB5B64245C5EA100D9AF67 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = HarleyHuang;
 				TargetAttributes = {
-					6E58A123245C256100AFC284 = {
+					6EFB5B6B245C5EA100D9AF67 = {
 						CreatedOnToolsVersion = 11.3.1;
 					};
 				};
 			};
-			buildConfigurationList = 6E58A11F245C256100AFC284 /* Build configuration list for PBXProject "AFNetworkInterpret" */;
+			buildConfigurationList = 6EFB5B67245C5EA100D9AF67 /* Build configuration list for PBXProject "AFNetworkInterpret" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -145,98 +118,56 @@
 				en,
 				Base,
 			);
-			mainGroup = 6E58A11B245C256100AFC284;
-			productRefGroup = 6E58A125245C256100AFC284 /* Products */;
+			mainGroup = 6EFB5B63245C5EA100D9AF67;
+			productRefGroup = 6EFB5B6D245C5EA100D9AF67 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6E58A123245C256100AFC284 /* AFNetworkInterpret */,
+				6EFB5B6B245C5EA100D9AF67 /* AFNetworkInterpret */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		6E58A122245C256100AFC284 /* Resources */ = {
+		6EFB5B6A245C5EA100D9AF67 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E58A137245C256200AFC284 /* LaunchScreen.storyboard in Resources */,
-				6E58A134245C256200AFC284 /* Assets.xcassets in Resources */,
-				6E58A132245C256100AFC284 /* Main.storyboard in Resources */,
+				6EFB5B7F245C5EA300D9AF67 /* LaunchScreen.storyboard in Resources */,
+				6EFB5B7C245C5EA300D9AF67 /* Assets.xcassets in Resources */,
+				6EFB5B7A245C5EA100D9AF67 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		76E07E0E661967C6D9C177CB /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-AFNetworkInterpret-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		92BD020F3B9920282C05A6D9 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AFNetworkInterpret/Pods-AFNetworkInterpret-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AFNetworkInterpret/Pods-AFNetworkInterpret-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AFNetworkInterpret/Pods-AFNetworkInterpret-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		6E58A120245C256100AFC284 /* Sources */ = {
+		6EFB5B68245C5EA100D9AF67 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E58A12F245C256100AFC284 /* ViewController.m in Sources */,
-				6E58A129245C256100AFC284 /* AppDelegate.m in Sources */,
-				6E58A13A245C256200AFC284 /* main.m in Sources */,
-				6E58A12C245C256100AFC284 /* SceneDelegate.m in Sources */,
+				6EFB5B77245C5EA100D9AF67 /* ViewController.m in Sources */,
+				6EFB5B71245C5EA100D9AF67 /* AppDelegate.m in Sources */,
+				6EFB5B82245C5EA300D9AF67 /* main.m in Sources */,
+				6EFB5B74245C5EA100D9AF67 /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		6E58A130245C256100AFC284 /* Main.storyboard */ = {
+		6EFB5B78245C5EA100D9AF67 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				6E58A131245C256100AFC284 /* Base */,
+				6EFB5B79245C5EA100D9AF67 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		6E58A135245C256200AFC284 /* LaunchScreen.storyboard */ = {
+		6EFB5B7D245C5EA300D9AF67 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				6E58A136245C256200AFC284 /* Base */,
+				6EFB5B7E245C5EA300D9AF67 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -244,7 +175,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		6E58A13B245C256200AFC284 /* Debug */ = {
+		6EFB5B83245C5EA300D9AF67 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -302,7 +233,7 @@
 			};
 			name = Debug;
 		};
-		6E58A13C245C256200AFC284 /* Release */ = {
+		6EFB5B84245C5EA300D9AF67 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -354,14 +285,12 @@
 			};
 			name = Release;
 		};
-		6E58A13E245C256200AFC284 /* Debug */ = {
+		6EFB5B86245C5EA300D9AF67 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FF0CE217B2F6301B74854F27 /* Pods-AFNetworkInterpret.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = AFNetworkInterpret/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -372,14 +301,12 @@
 			};
 			name = Debug;
 		};
-		6E58A13F245C256200AFC284 /* Release */ = {
+		6EFB5B87245C5EA300D9AF67 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 01AEF893A1605DD5419B286F /* Pods-AFNetworkInterpret.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = AFNetworkInterpret/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -393,25 +320,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6E58A11F245C256100AFC284 /* Build configuration list for PBXProject "AFNetworkInterpret" */ = {
+		6EFB5B67245C5EA100D9AF67 /* Build configuration list for PBXProject "AFNetworkInterpret" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6E58A13B245C256200AFC284 /* Debug */,
-				6E58A13C245C256200AFC284 /* Release */,
+				6EFB5B83245C5EA300D9AF67 /* Debug */,
+				6EFB5B84245C5EA300D9AF67 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6E58A13D245C256200AFC284 /* Build configuration list for PBXNativeTarget "AFNetworkInterpret" */ = {
+		6EFB5B85245C5EA300D9AF67 /* Build configuration list for PBXNativeTarget "AFNetworkInterpret" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6E58A13E245C256200AFC284 /* Debug */,
-				6E58A13F245C256200AFC284 /* Release */,
+				6EFB5B86245C5EA300D9AF67 /* Debug */,
+				6EFB5B87245C5EA300D9AF67 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 6E58A11C245C256100AFC284 /* Project object */;
+	rootObject = 6EFB5B64245C5EA100D9AF67 /* Project object */;
 }
