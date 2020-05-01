@@ -7,16 +7,45 @@
 //
 
 #import "ViewController.h"
+#import "AFNetworking.h"
 
 @interface ViewController ()
-
+@property(nonatomic, retain)UIButton *testBtn;
 @end
 
 @implementation ViewController
+- (UIButton *)testBtn {
+    if (!_testBtn) {
+        _testBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 - 50, 100, 100, 60)];
+        [_testBtn setTitle:@"测试" forState:UIControlStateNormal];
+        _testBtn.backgroundColor = UIColor.purpleColor;
+        [_testBtn addTarget:self action:@selector(afnetworkTextClickAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _testBtn;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    if (@available(iOS 13.0, *)) {
+        self.view.backgroundColor = UIColor.systemGroupedBackgroundColor;
+    } else {
+        self.view.backgroundColor = UIColor.groupTableViewBackgroundColor;
+    }
+    
+    [self.view addSubview:self.testBtn];
+}
+
+
+- (void) afnetworkTextClickAction:(UIButton *)sender {
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc]init];
+    [manager GET:@"https://www.jianshu.com/p/e7e1864942b1" parameters:nil headers:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"相应结果：%@", responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+
+    }];
+    
 }
 
 
