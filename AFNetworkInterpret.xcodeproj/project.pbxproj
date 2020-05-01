@@ -61,6 +61,7 @@
 		6EFB5B6E245C5EA100D9AF67 /* AFNetworkInterpret */ = {
 			isa = PBXGroup;
 			children = (
+				6EFB5B8A245C659900D9AF67 /* ThirdLibry */,
 				6EFB5B6F245C5EA100D9AF67 /* AppDelegate.h */,
 				6EFB5B70245C5EA100D9AF67 /* AppDelegate.m */,
 				6EFB5B72245C5EA100D9AF67 /* SceneDelegate.h */,
@@ -74,6 +75,13 @@
 				6EFB5B81245C5EA300D9AF67 /* main.m */,
 			);
 			path = AFNetworkInterpret;
+			sourceTree = "<group>";
+		};
+		6EFB5B8A245C659900D9AF67 /* ThirdLibry */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ThirdLibry;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
