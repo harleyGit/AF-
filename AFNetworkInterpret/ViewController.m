@@ -37,6 +37,14 @@
 
 
 - (void) afnetworkTextClickAction:(UIButton *)sender {
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc]init];
+    [manager GET:@"http://localhost" parameters:nil headers:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
     
 }
 
