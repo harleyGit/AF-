@@ -107,18 +107,25 @@ id AFJSONObjectByRemovingKeysWithNullValues(id JSONObject, NSJSONReadingOptions 
 
 #pragma mark -
 
+// 判断是不是可接受类型和可接受code，不是则填充error
 - (BOOL)validateResponse:(NSHTTPURLResponse *)response
                     data:(NSData *)data
                    error:(NSError * __autoreleasing *)error
 {
+    //response是否合法标识
     BOOL responseIsValid = YES;
+    //验证的error
     NSError *validationError = nil;
 
+    //如果存在且是NSHTTPURLResponse
     if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
         if (self.acceptableContentTypes && ![self.acceptableContentTypes containsObject:[response MIMEType]] &&
             !([response MIMEType] == nil && [data length] == 0)) {
 
+            //主要判断自己能接受的数据类型和response的数据类型是否匹配，
+            //如果有接受数据类型，如果不匹配response，而且响应类型不为空，数据长度不为0
             if ([data length] > 0 && [response URL]) {
+                 //错误信息字典，填充一些错误信息
                 NSMutableDictionary *mutableUserInfo = [@{
                                                           NSLocalizedDescriptionKey: [NSString stringWithFormat:NSLocalizedStringFromTable(@"Request failed: unacceptable content-type: %@", @"AFNetworking", nil), [response MIMEType]],
                                                           NSURLErrorFailingURLErrorKey:[response URL],
@@ -127,13 +134,16 @@ id AFJSONObjectByRemovingKeysWithNullValues(id JSONObject, NSJSONReadingOptions 
                 if (data) {
                     mutableUserInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] = data;
                 }
-
+                //生成错误
                 validationError = AFErrorWithUnderlyingError([NSError errorWithDomain:AFURLResponseSerializationErrorDomain code:NSURLErrorCannotDecodeContentData userInfo:mutableUserInfo], validationError);
             }
 
+            //返回标识
             responseIsValid = NO;
         }
 
+        //判断自己可接受的状态吗
+        //如果和response的状态码不匹配，则进入if块
         if (self.acceptableStatusCodes && ![self.acceptableStatusCodes containsIndex:(NSUInteger)response.statusCode] && [response URL]) {
             NSMutableDictionary *mutableUserInfo = [@{
                                                NSLocalizedDescriptionKey: [NSString stringWithFormat:NSLocalizedStringFromTable(@"Request failed: %@ (%ld)", @"AFNetworking", nil), [NSHTTPURLResponse localizedStringForStatusCode:response.statusCode], (long)response.statusCode],
@@ -145,8 +155,9 @@ id AFJSONObjectByRemovingKeysWithNullValues(id JSONObject, NSJSONReadingOptions 
                 mutableUserInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] = data;
             }
 
+            //生成错误
             validationError = AFErrorWithUnderlyingError([NSError errorWithDomain:AFURLResponseSerializationErrorDomain code:NSURLErrorBadServerResponse userInfo:mutableUserInfo], validationError);
-
+            //返回标识
             responseIsValid = NO;
         }
     }
@@ -159,7 +170,7 @@ id AFJSONObjectByRemovingKeysWithNullValues(id JSONObject, NSJSONReadingOptions 
 }
 
 #pragma mark - AFURLResponseSerialization
-
+//数据解析协议
 - (id)responseObjectForResponse:(NSURLResponse *)response
                            data:(NSData *)data
                           error:(NSError *__autoreleasing *)error

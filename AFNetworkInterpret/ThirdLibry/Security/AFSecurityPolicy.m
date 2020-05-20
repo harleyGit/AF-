@@ -39,9 +39,10 @@ _out:
     return nil;
 }
 #endif
-
+//判断两个公钥是否相同
 static BOOL AFSecKeyIsEqualToKey(SecKeyRef key1, SecKeyRef key2) {
 #if TARGET_OS_IOS || TARGET_OS_WATCH || TARGET_OS_TV
+    //iOS 判断二者地址
     return [(__bridge id)key1 isEqual:(__bridge id)key2];
 #else
     return [AFSecKeyGetData(key1) isEqual:AFSecKeyGetData(key2)];
@@ -98,37 +99,51 @@ _out:
 }
 
 static NSArray * AFCertificateTrustChainForServerTrust(SecTrustRef serverTrust) {
+    //使用SecTrustGetCertificateCount函数获取到serverTrust中需要评估的证书链中的证书数目，并保存到certificateCount中
     CFIndex certificateCount = SecTrustGetCertificateCount(serverTrust);
+    //创建数组
     NSMutableArray *trustChain = [NSMutableArray arrayWithCapacity:(NSUInteger)certificateCount];
 
     for (CFIndex i = 0; i < certificateCount; i++) {
         SecCertificateRef certificate = SecTrustGetCertificateAtIndex(serverTrust, i);
+        /// 使用SecTrustGetCertificateAtIndex函数获取到证书链中的每个证书，并添加到trustChain中，最后返回trustChain
         [trustChain addObject:(__bridge_transfer NSData *)SecCertificateCopyData(certificate)];
     }
 
     return [NSArray arrayWithArray:trustChain];
 }
 
+//从serverTrust中取出服务器端传过来的所有可用的证书，并依次得到相应的公钥
 static NSArray * AFPublicKeyTrustChainForServerTrust(SecTrustRef serverTrust) {
+    // 接下来的一小段代码和上面AFCertificateTrustChainForServerTrust函数的作用基本一致，都是为了获取到serverTrust中证书链上的所有证书，并依次遍历，取出公钥。
+    //安全策略
     SecPolicyRef policy = SecPolicyCreateBasicX509();
     CFIndex certificateCount = SecTrustGetCertificateCount(serverTrust);
     NSMutableArray *trustChain = [NSMutableArray arrayWithCapacity:(NSUInteger)certificateCount];
+    //遍历serverTrust里证书的证书链
     for (CFIndex i = 0; i < certificateCount; i++) {
+        //从证书链取证书
         SecCertificateRef certificate = SecTrustGetCertificateAtIndex(serverTrust, i);
 
+        //数组
         SecCertificateRef someCertificates[] = {certificate};
+        //CF数组
         CFArrayRef certificates = CFArrayCreate(NULL, (const void **)someCertificates, 1, NULL);
 
         SecTrustRef trust;
+        // 根据给定的certificates和policy来生成一个trust对象
+        //不成功跳到 _out。
         __Require_noErr_Quiet(SecTrustCreateWithCertificates(certificates, policy, &trust), _out);
         SecTrustResultType result;
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
         __Require_noErr_Quiet(SecTrustEvaluate(trust, &result), _out);
 #pragma clang diagnostic pop
+        // 如果该trust符合X.509证书格式，那么先使用SecTrustCopyPublicKey获取到trust的公钥，再将此公钥添加到trustChain中
         [trustChain addObject:(__bridge_transfer id)SecTrustCopyPublicKey(trust)];
 
     _out:
+        //释放资源
         if (trust) {
             CFRelease(trust);
         }
