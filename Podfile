@@ -10,6 +10,7 @@ target 'AFNetworkInterpret' do
   
   # 针对AFNetworkInterpret target引入AFNetworking
 	#pod 'AFNetworking', '4.0.1'
+	pod 'SDWebImage', '5.7.3'
 	
 
   # Pods for AFNetworkInterpret
