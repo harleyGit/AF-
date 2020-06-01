@@ -10,6 +10,7 @@ target 'AFNetworkInterpret' do
   
   # 针对AFNetworkInterpret target引入AFNetworking
 	#pod 'AFNetworking', '4.0.1'
+ 	pod 'RxSwift', '~> 5.1.1'
 	
 
   # Pods for AFNetworkInterpret
