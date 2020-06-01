@@ -37,10 +37,9 @@ AFNetworking主要是对NSURLSession和NSURLConnection(iOS9.0废弃)的封装,�
 
 ```
 
-<br/>
+
 -   weakSelf与strongSelf的用法
-```
-//weakSelf避免循环引用
+```//weakSelf避免循环引用
 __weak __typeof(self)weakSelf = self;
 AFNetworkReachabilityStatusCallback callback = ^(AFNetworkReachabilityStatus status) {
     //strongSelf保证block内部执行过程中self不会被释放
@@ -53,20 +52,20 @@ AFNetworkReachabilityStatusCallback callback = ^(AFNetworkReachabilityStatus sta
 
     return strongSelf;
 };
-
 ```
 
-
-<br/>
 
 
 
 # AFNetworking 
 
 
+------
+
+
 
 ># SDWebImage 
-<br/>
+
 `**参考资料：**`
 [SDWebImage源码解析](https://blog.csdn.net/weixin_39624536/article/details/93195493)
 
@@ -74,9 +73,9 @@ AFNetworkReachabilityStatusCallback callback = ^(AFNetworkReachabilityStatus sta
 
 
 
-<br/>
-***
-<br/>
+
+------
+
 ># HTTP 和 HTTPS
 SSL协议工作在应用层与传输层之间；
 [HTTP与HTTPS 简介](https://www.jianshu.com/p/da6af12f412e)
