@@ -510,7 +510,6 @@
 				6EFB5B68245C5EA100D9AF67 /* Sources */,
 				6EFB5B69245C5EA100D9AF67 /* Frameworks */,
 				6EFB5B6A245C5EA100D9AF67 /* Resources */,
-				2CCFFE8E12E59298F92F6E52 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -569,23 +568,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2CCFFE8E12E59298F92F6E52 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AFNetworkInterpret/Pods-AFNetworkInterpret-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AFNetworkInterpret/Pods-AFNetworkInterpret-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AFNetworkInterpret/Pods-AFNetworkInterpret-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		F189D6C5D0A72AD5AB390011 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

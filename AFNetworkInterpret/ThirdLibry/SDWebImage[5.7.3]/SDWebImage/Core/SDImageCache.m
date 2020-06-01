@@ -18,10 +18,15 @@
 @interface SDImageCache ()
 
 #pragma mark - Properties
+//内存缓存对象
 @property (nonatomic, strong, readwrite, nonnull) id<SDMemoryCache> memoryCache;
+//磁盘缓存对象
 @property (nonatomic, strong, readwrite, nonnull) id<SDDiskCache> diskCache;
+//缓存配置对象，包含所有配置项
 @property (nonatomic, copy, readwrite, nonnull) SDImageCacheConfig *config;
+//磁盘缓存路径
 @property (nonatomic, copy, readwrite, nonnull) NSString *diskCachePath;
+//执行处理输入输出的队列
 @property (nonatomic, strong, nullable) dispatch_queue_t ioQueue;
 
 @end
@@ -185,12 +190,14 @@
         return;
     }
     // if memory cache is enabled
+    //缓存到内存
     if (toMemory && self.config.shouldCacheImagesInMemory) {
         NSUInteger cost = image.sd_memoryCost;
         [self.memoryCache setObject:image forKey:key cost:cost];
     }
     
     if (toDisk) {
+        //异步操作，缓存到磁盘
         dispatch_async(self.ioQueue, ^{
             @autoreleasepool {
                 NSData *data = imageData;
@@ -200,6 +207,8 @@
                 }
                 if (!data && image) {
                     // Check image's associated image format, may return .undefined
+                    //如果我们没有任何数据来检测图像格式，请检查它是否包含使用PNG或JPEG格式的Alpha通道
+                    //在前面，当image被转换时，传入的data为nil，在这里重新计算
                     SDImageFormat format = image.sd_imageFormat;
                     if (format == SDImageFormatUndefined) {
                         // If image is animated, use GIF (APNG may be better, but has bugs before macOS 10.14)
@@ -207,6 +216,7 @@
                             format = SDImageFormatGIF;
                         } else {
                             // If we do not have any data to detect image format, check whether it contains alpha channel to use PNG or JPEG format
+                            //选择图片的格式
                             if ([SDImageCoderHelper CGImageContainsAlpha:image.CGImage]) {
                                 format = SDImageFormatPNG;
                             } else {
@@ -216,6 +226,7 @@
                     }
                     data = [[SDImageCodersManager sharedManager] encodedDataWithImage:image format:format options:nil];
                 }
+                //将图片存储到磁盘
                 [self _storeImageDataToDisk:data forKey:key];
                 if (image) {
                     // Check extended data
@@ -258,6 +269,7 @@
     }
 }
 
+//存储image到缓存
 - (void)storeImageToMemory:(UIImage *)image forKey:(NSString *)key {
     if (!image || !key) {
         return;
@@ -266,12 +278,13 @@
     [self.memoryCache setObject:image forKey:key cost:cost];
 }
 
+//存储Image到磁盘
 - (void)storeImageDataToDisk:(nullable NSData *)imageData
                       forKey:(nullable NSString *)key {
     if (!imageData || !key) {
         return;
     }
-    
+    //使用的是串行同步队列
     dispatch_sync(self.ioQueue, ^{
         [self _storeImageDataToDisk:imageData forKey:key];
     });
@@ -287,7 +300,7 @@
 }
 
 #pragma mark - Query and Retrieve Ops
-
+//异步检查图片是否缓存在磁盘中
 - (void)diskImageExistsWithKey:(nullable NSString *)key completion:(nullable SDImageCacheCheckCompletionBlock)completionBlock {
     dispatch_async(self.ioQueue, ^{
         BOOL exists = [self _diskImageDataExistsWithKey:key];
@@ -332,6 +345,7 @@
     });
 }
 
+//根据key返回磁盘中imageData
 - (nullable NSData *)diskImageDataForKey:(nullable NSString *)key {
     if (!key) {
         return nil;
@@ -344,10 +358,12 @@
     return imageData;
 }
 
+//根据key返回缓存中image
 - (nullable UIImage *)imageFromMemoryCacheForKey:(nullable NSString *)key {
     return [self.memoryCache objectForKey:key];
 }
 
+//根据key返回磁盘中image
 - (nullable UIImage *)imageFromDiskCacheForKey:(nullable NSString *)key {
     return [self imageFromDiskCacheForKey:key options:0 context:nil];
 }

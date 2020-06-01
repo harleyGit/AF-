@@ -17,21 +17,25 @@ typedef NS_ENUM(NSInteger, SDImageCacheType) {
      * For query and contains op in response, means the image isn't available in the image cache
      * For op in request, this type is not available and take no effect.
      */
+    //从网络下载的图片在SDWebImage缓存中无效
     SDImageCacheTypeNone,
     /**
      * For query and contains op in response, means the image was obtained from the disk cache.
      * For op in request, means process only disk cache.
      */
+    //从硬盘缓存中获取的图片。
     SDImageCacheTypeDisk,
     /**
      * For query and contains op in response, means the image was obtained from the memory cache.
      * For op in request, means process only memory cache.
      */
+    //从内存缓存中获取的图片
     SDImageCacheTypeMemory,
     /**
      * For query and contains op in response, this type is not available and take no effect.
      * For op in request, means process both memory cache and disk cache.
      */
+    //同时存储在磁盘和缓存
     SDImageCacheTypeAll
 };
 

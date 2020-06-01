@@ -84,6 +84,7 @@ static void * SDMemoryCacheContext = &SDMemoryCacheContext;
 
 // `setObject:forKey:` just call this with 0 cost. Override this is enough
 //setObject的相关方法都会调到这里来，因此只需重写这个方法
+//将图片的数据存进缓存中，使用的是weakCache
 - (void)setObject:(id)obj forKey:(id)key cost:(NSUInteger)g {
     [super setObject:obj forKey:key cost:g];
     if (!self.config.shouldUseWeakMemoryCache) {
@@ -93,6 +94,7 @@ static void * SDMemoryCacheContext = &SDMemoryCacheContext;
         // Store weak cache
         //宏定义使用的是 dispatch_semaphore_wait，使其信号量减1
         SD_LOCK(self.weakCacheLock);
+        //weakCache是一个键是强引用，值是弱引用的MapTable
         [self.weakCache setObject:obj forKey:key];
         //宏定义使用的是dispatch_semphore_signal  信号量加1
         SD_UNLOCK(self.weakCacheLock);

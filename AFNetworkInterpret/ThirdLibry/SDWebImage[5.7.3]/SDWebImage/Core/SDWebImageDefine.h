@@ -9,7 +9,9 @@
 #import "SDWebImageCompat.h"
 
 typedef void(^SDWebImageNoParamsBlock)(void);
+//NS_EXTENSIBLE_STRING_ENUM 修饰符，它的作用是在桥接到 Swift 中时可进行枚举扩展
 typedef NSString * SDWebImageContextOption NS_EXTENSIBLE_STRING_ENUM;
+//给 NSDictionary<SDWebImageContextOption, id> 起别名为 SDWebImageContext
 typedef NSDictionary<SDWebImageContextOption, id> SDWebImageContext;
 typedef NSMutableDictionary<SDWebImageContextOption, id> SDWebImageMutableContext;
 
@@ -49,23 +51,27 @@ FOUNDATION_EXPORT UIImage * _Nullable SDScaledImageForScaleFactor(CGFloat scale,
 #pragma mark - WebCache Options
 
 /// WebCache options
+//枚举类来控制下载操作中的配置，主要配置下载的优先级，策略，缓存策略等
 typedef NS_OPTIONS(NSUInteger, SDWebImageOptions) {
     /**
      * By default, when a URL fail to be downloaded, the URL is blacklisted so the library won't keep trying.
      * This flag disable this blacklisting.
      */
+    //失败后重试
     SDWebImageRetryFailed = 1 << 0,
     
     /**
      * By default, image downloads are started during UI interactions, this flags disable this feature,
      * leading to delayed download on UIScrollView deceleration for instance.
      */
+    //UI交互期间开始下载，导致延迟下载比如UIScrollView减速
     SDWebImageLowPriority = 1 << 1,
     
     /**
      * This flag enables progressive download, the image is displayed progressively during download as a browser would do.
      * By default, the image is only displayed once completely downloaded.
      */
+    //这个标志可以渐进式下载,显示的图像是逐步在下载
     SDWebImageProgressiveLoad = 1 << 2,
     
     /**
@@ -76,12 +82,14 @@ typedef NS_OPTIONS(NSUInteger, SDWebImageOptions) {
      *
      * Use this flag only if you can't make your URLs static with embedded cache busting parameter.
      */
+    //刷新缓存,如果设置了该类型，缓存策略依据NSURLCache而不是SDImageCache，所以可以通过NSURLCache进行缓存了
     SDWebImageRefreshCached = 1 << 3,
     
     /**
      * In iOS 4+, continue the download of the image if the app goes to background. This is achieved by asking the system for
      * extra time in background to let the request finish. If the background task expires the operation will be cancelled.
      */
+    //后台下载
     SDWebImageContinueInBackground = 1 << 4,
     
     /**
@@ -94,24 +102,28 @@ typedef NS_OPTIONS(NSUInteger, SDWebImageOptions) {
      * Enable to allow untrusted SSL certificates.
      * Useful for testing purposes. Use with caution in production.
      */
+    //允许使用无效的SSL证书
     SDWebImageAllowInvalidSSLCertificates = 1 << 6,
     
     /**
      * By default, images are loaded in the order in which they were queued. This flag moves them to
      * the front of the queue.
      */
+    //优先下载
     SDWebImageHighPriority = 1 << 7,
     
     /**
      * By default, placeholder images are loaded while the image is loading. This flag will delay the loading
      * of the placeholder image until after the image has finished loading.
      */
+    //延迟占位符
     SDWebImageDelayPlaceholder = 1 << 8,
     
     /**
      * We usually don't apply transform on animated images as most transformers could not manage animated images.
      * Use this flag to transform them anyway.
      */
+    //改变动画形象
     SDWebImageTransformAnimatedImage = 1 << 9,
     
     /**
@@ -119,6 +131,7 @@ typedef NS_OPTIONS(NSUInteger, SDWebImageOptions) {
      * have the hand before setting the image (apply a filter or add it with cross-fade animation for instance)
      * Use this flag if you want to manually set the image in the completion when success
      */
+    //手动在图片下载完成后设置图片
     SDWebImageAvoidAutoSetImage = 1 << 10,
     
     /**
@@ -134,12 +147,14 @@ typedef NS_OPTIONS(NSUInteger, SDWebImageOptions) {
     /**
      * By default, we do not query image data when the image is already cached in memory. This mask can force to query image data at the same time. However, this query is asynchronously unless you specify `SDWebImageQueryMemoryDataSync`
      */
+    //查询内存缓存
     SDWebImageQueryMemoryData = 1 << 12,
     
     /**
      * By default, when you only specify `SDWebImageQueryMemoryData`, we query the memory image data asynchronously. Combined this mask as well to query the memory image data synchronously.
      * @note Query data synchronously is not recommend, unless you want to ensure the image is loaded in the same runloop to avoid flashing during cell reusing.
      */
+    //同步查询内存缓存
     SDWebImageQueryMemoryDataSync = 1 << 13,
     
     /**
@@ -147,38 +162,45 @@ typedef NS_OPTIONS(NSUInteger, SDWebImageOptions) {
      * @note These 3 query options can be combined together. For the full list about these masks combination, see wiki page.
      * @note Query data synchronously is not recommend, unless you want to ensure the image is loaded in the same runloop to avoid flashing during cell reusing.
      */
+    //同步查询磁盘缓存
     SDWebImageQueryDiskDataSync = 1 << 14,
     
     /**
      * By default, when the cache missed, the image is load from the loader. This flag can prevent this to load from cache only.
      */
+    //默认情况下，当缓存丢失时，SD将从网络下载图像。 此flat可以防止这样，使其仅从缓存加载
     SDWebImageFromCacheOnly = 1 << 15,
     
     /**
      * By default, we query the cache before the image is load from the loader. This flag can prevent this to load from loader only.
      */
+    //默认情况下，SD在下载之前先从缓存中查找，此flat可以防止这样，使其仅从网络下载
     SDWebImageFromLoaderOnly = 1 << 16,
     
     /**
      * By default, when you use `SDWebImageTransition` to do some view transition after the image load finished, this transition is only applied for image download from the network. This mask can force to apply view transition for memory and disk cache as well.
      */
+    //默认情况下，SD在图像加载完成后使用 SDWebImageTransition 进行某些视图转换，此转换仅适用于从网络下载图像。 此flat可以强制为内存和磁盘缓存应用视图转换
     SDWebImageForceTransition = 1 << 17,
     
     /**
      * By default, we will decode the image in the background during cache query and download from the network. This can help to improve performance because when rendering image on the screen, it need to be firstly decoded. But this happen on the main queue by Core Animation.
      * However, this process may increase the memory usage as well. If you are experiencing a issue due to excessive memory consumption, This flag can prevent decode the image.
      */
+    //默认情况下，SD在查询缓存和从网络下载时会在后台解码图像，这有助于提高性能，因为在屏幕上渲染图像时，需要首先对其进行解码。这发生在 Core Animation 的主队列中。然而此过程也可能会增加内存使用量。 如果由于过多的内存消耗而遇到问题，可以用此flat禁止解码图像
     SDWebImageAvoidDecodeImage = 1 << 18,
     
     /**
      * By default, we decode the animated image. This flag can force decode the first frame only and produece the static image.
      */
+    //默认情况下，SD会解码动画图像，该flat强制只解码第一帧并生成静态图
     SDWebImageDecodeFirstFrameOnly = 1 << 19,
     
     /**
      * By default, for `SDAnimatedImage`, we decode the animated image frame during rendering to reduce memory usage. However, you can specify to preload all frames into memory to reduce CPU usage when the animated image is shared by lots of imageViews.
      * This will actually trigger `preloadAllAnimatedImageFrames` in the background queue(Disk Cache & Download only).
      */
+    //默认情况下，对于 SDAnimatedImage ，SD会在渲染过程中解码动画图像帧以减少内存使用量。 但是用户可以指定将所有帧预加载到内存中，以便在大量imageView共享动画图像时降低CPU使用率。这实际上会在后台队列中触发 preloadAllAnimatedImageFrames （仅限磁盘缓存和下载）
     SDWebImagePreloadAllFrames = 1 << 20,
     
     /**

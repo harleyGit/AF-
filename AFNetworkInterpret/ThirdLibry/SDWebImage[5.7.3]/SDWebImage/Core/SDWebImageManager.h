@@ -22,6 +22,7 @@ typedef void(^SDInternalCompletionBlock)(UIImage * _Nullable image, NSData * _Nu
 /**
  A combined operation representing the cache and loader operation. You can use it to cancel the load process.
  */
+//对每一个下载任务的封装，重要的是它提供了一个取消功能
 @interface SDWebImageCombinedOperation : NSObject <SDWebImageOperation>
 
 /**
@@ -47,6 +48,7 @@ typedef void(^SDInternalCompletionBlock)(UIImage * _Nullable image, NSData * _Nu
 /**
  The manager delegate protocol.
  */
+//提供下载图片之前和之后的回调
 @protocol SDWebImageManagerDelegate <NSObject>
 
 @optional
@@ -94,6 +96,10 @@ SDWebImageManager *manager = [SDWebImageManager sharedManager];
                 }];
 
  * @endcode
+ */
+//提供一个单例对象，用来统一控制下载和缓存操作
+/*
+ *SDWebImageManager类是SDWebImage中的核心类，主要负责调用SDWebImageDownloader进行图片下载，以及在下载之后利用SDImageCache进行图片缓存。并且此类还可以跳过UIImageViewe/Cache或者UIView/Cache单独使用，不仅局限于一个UIView。
  */
 @interface SDWebImageManager : NSObject
 

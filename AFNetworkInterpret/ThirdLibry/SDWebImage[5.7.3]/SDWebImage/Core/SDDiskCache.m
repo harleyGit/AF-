@@ -59,6 +59,7 @@ static NSString * const SDDiskCacheExtendedAttributeName = @"com.hackemist.SDDis
     return exists;
 }
 
+//根据Key获取图片的Data
 - (NSData *)dataForKey:(NSString *)key {
     NSParameterAssert(key);
     NSString *filePath = [self cachePathForKey:key];
@@ -77,6 +78,7 @@ static NSString * const SDDiskCacheExtendedAttributeName = @"com.hackemist.SDDis
     return nil;
 }
 
+/// 存储图片的数据到磁盘中
 - (void)setData:(NSData *)data forKey:(NSString *)key {
     NSParameterAssert(data);
     NSParameterAssert(key);
@@ -88,7 +90,7 @@ static NSString * const SDDiskCacheExtendedAttributeName = @"com.hackemist.SDDis
     NSString *cachePathForKey = [self cachePathForKey:key];
     // transform to NSUrl
     NSURL *fileURL = [NSURL fileURLWithPath:cachePathForKey];
-    
+    //写入文件的方式：NSDataWritingWithoutOverwriting： 如果已存在文件，则不会覆盖原文件，写入失败
     [data writeToURL:fileURL options:self.config.diskCacheWritingOptions error:nil];
     
     // disable iCloud backup
