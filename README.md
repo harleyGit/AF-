@@ -61,4 +61,38 @@ AFNetworkReachabilityStatusCallback callback = ^(AFNetworkReachabilityStatus sta
 
 
 
+# AFNetworking 
+
+
+
+># SDWebImage 
+<br/>
+`**参考资料：**`
+[SDWebImage源码解析](https://blog.csdn.net/weixin_39624536/article/details/93195493)
+
+
+
+># RxSwift
+<br/>
+[RxSwift核心逻辑分析](https://www.jianshu.com/p/aeb0017e7adb)
+
+
+
+
+
+<br/>
+***
+<br/>
+># HTTP 和 HTTPS
+SSL协议工作在应用层与传输层之间；
+[HTTP与HTTPS 简介](https://www.jianshu.com/p/da6af12f412e)
+[HTTPS 加密过程](https://blog.csdn.net/qq_32998153/article/details/80022489)
+
+
+
+
+
+
+
+
 
