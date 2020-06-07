@@ -10,14 +10,35 @@
 
 @interface ViewController ()
 
+@property(nonatomic, retain)UIButton *testBtn;
 @end
 
 @implementation ViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+- (UIButton *)testBtn {
+    if (!_testBtn) {
+        _testBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 - 50, 100, 100, 60)];
+        [_testBtn setTitle:@"测试" forState:UIControlStateNormal];
+        _testBtn.backgroundColor = UIColor.purpleColor;
+        [_testBtn addTarget:self action:@selector(afnetworkTextClickAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _testBtn;
 }
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    if (@available(iOS 13.0, *)) {
+        self.view.backgroundColor = UIColor.systemGroupedBackgroundColor;
+    } else {
+        self.view.backgroundColor = UIColor.groupTableViewBackgroundColor;
+    }
+    
+    [self.view addSubview:self.testBtn];
+}
+
+
+- (void) afnetworkTextClickAction:(UIButton *)sender {
+    
+}
 
 @end
