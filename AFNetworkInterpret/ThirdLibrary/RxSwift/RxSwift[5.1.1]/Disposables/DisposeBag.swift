@@ -27,6 +27,8 @@ or create a new one in its place.
 
 In case explicit disposal is necessary, there is also `CompositeDisposable`.
 */
+///DisposeBag：线程安全袋
+///在deinit方法中将添加的disposes释放。其内部持有一个Disposable数组，当调用disposed(by bag: DisposeBag)添加到一个bag中，实际上是insert( disposable: Disposable)到该数组中，对应的在deinit方法中会remove元素。
 public final class DisposeBag: DisposeBase {
     
     private var _lock = SpinLock()

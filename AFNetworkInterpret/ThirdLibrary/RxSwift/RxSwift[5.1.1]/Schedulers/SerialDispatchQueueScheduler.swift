@@ -36,6 +36,7 @@ public class SerialDispatchQueueScheduler : SchedulerType {
         return Date()
     }
 
+    //包含DispatchQueue和DispatchTimeInterval延时
     let configuration: DispatchQueueConfiguration
     
     /**

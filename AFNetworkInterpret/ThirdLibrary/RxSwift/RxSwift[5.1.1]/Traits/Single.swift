@@ -15,11 +15,14 @@ public enum SingleTrait { }
 /// Represents a push style sequence containing 1 element.
 public typealias Single<Element> = PrimitiveSequence<SingleTrait, Element>
 
+//对应到SingleEvent中
 public enum SingleEvent<Element> {
     /// One and only sequence element is produced. (underlying observable sequence emits: `.next(Element)`, `.completed`)
+    ///只生成一个序列元素。(底层可观察序列发出:' .next(Element) '， ' .completed ')    case success(Element)
     case success(Element)
     
     /// Sequence terminated with an error. (underlying observable sequence emits: `.error(Error)`)
+    ///序列以错误结束。(底层可观察序列发出:' .error(Error) ')
     case error(Swift.Error)
 }
 
@@ -34,6 +37,8 @@ extension PrimitiveSequenceType where Trait == SingleTrait {
      - parameter subscribe: Implementation of the resulting observable sequence's `subscribe` method.
      - returns: The observable sequence with the specified implementation for the `subscribe` method.
      */
+    //从指定的订阅方法实现创建可观察序列
+    //(SingleEvent<ElementType>) -> Void作为SingleObserver参数，实际上Maybe和Single以及Completable在此处的区别就是处理不同的case
     public static func create(subscribe: @escaping (@escaping SingleObserver) -> Disposable) -> Single<Element> {
         let source = Observable<Element>.create { observer in
             return subscribe { event in
@@ -56,8 +61,10 @@ extension PrimitiveSequenceType where Trait == SingleTrait {
      
      - returns: Subscription for `observer` that can be used to cancel production of sequence elements and free resources.
      */
+    //订阅“观察者”接收此序列的事件
     public func subscribe(_ observer: @escaping (SingleEvent<Element>) -> Void) -> Disposable {
         var stopped = false
+        //拿到source中当前的SingleEvent
         return self.primitiveSequence.asObservable().subscribe { event in
             if stopped { return }
             stopped = true

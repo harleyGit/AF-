@@ -90,6 +90,7 @@ extension Hooks {
     public typealias DefaultErrorHandler = (_ subscriptionCallStack: [String], _ error: Error) -> Void
     public typealias CustomCaptureSubscriptionCallstack = () -> [String]
 
+    ///_lock 是一个递归锁
     private static let _lock = RecursiveLock()
     private static var _defaultErrorHandler: DefaultErrorHandler = { subscriptionCallStack, error in
         #if DEBUG
@@ -121,8 +122,11 @@ extension Hooks {
     }
     
     /// Subscription callstack block to fetch custom callstack information.
+    //此处重写了属性的set get方法用到 NSRecursiveLock 递归锁🔐 搭配defer保证线程安全
     public static var customCaptureSubscriptionCallstack: CustomCaptureSubscriptionCallstack {
         get {
+            ///递归锁锁住， 递归锁解锁
+            ///defer 会在 return 执行前调用它里面的函数，这里就是在它return之前进行解锁
             _lock.lock(); defer { _lock.unlock() }
             return _customCaptureSubscriptionCallstack
         }

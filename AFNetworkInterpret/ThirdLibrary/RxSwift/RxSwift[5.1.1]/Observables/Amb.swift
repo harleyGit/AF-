@@ -16,6 +16,7 @@ extension ObservableType {
      */
     public static func amb<Sequence: Swift.Sequence>(_ sequence: Sequence) -> Observable<Element>
         where Sequence.Element == Observable<Element> {
+            //使用reduce作为一个不终止的可观察序列，可用于表示无限持续时间
             return sequence.reduce(Observable<Sequence.Element.Element>.never()) { a, o in
                 return a.amb(o.asObservable())
             }
@@ -32,6 +33,7 @@ extension ObservableType {
      - parameter right: Second observable sequence.
      - returns: An observable sequence that surfaces either of the given sequences, whichever reacted first.
      */
+    //该方法会生成一个Amb<Element>: Producer<Element>类，内部持有当前这两个Observable，当调用subscribe方法时调用run<O : ObserverType>(_ observer: O, cancel: Cancelable)
     public func amb<O2: ObservableType>
         (_ right: O2)
         -> Observable<Element> where O2.Element == Element {
@@ -149,6 +151,7 @@ final private class Amb<Element>: Producer<Element> {
         self._right = right
     }
     
+    //该方法生成AmbSink<O: ObserverType>: Sink<O>对象并执行run方法，内部在状态为self._choice == me时执行self.forwardOn(event)
     override func run<Observer: ObserverType>(_ observer: Observer, cancel: Cancelable) -> (sink: Disposable, subscription: Disposable) where Observer.Element == Element {
         let sink = AmbSink(parent: self, observer: observer, cancel: cancel)
         let subscription = sink.run()

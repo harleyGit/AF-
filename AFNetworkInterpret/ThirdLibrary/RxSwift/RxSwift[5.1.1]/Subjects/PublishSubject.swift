@@ -57,6 +57,7 @@ public final class PublishSubject<Element>
     ///
     /// - parameter event: Event to send to the observers.
     public func on(_ event: Event<Element>) {
+        //发送
         #if DEBUG
             self._synchronizationTracker.register(synchronizationErrorMessage: .default)
             defer { self._synchronizationTracker.unregister() }
@@ -92,6 +93,7 @@ public final class PublishSubject<Element>
     - parameter observer: Observer to subscribe to the subject.
     - returns: Disposable object that can be used to unsubscribe the observer from the subject.
     */
+    //订阅
     public override func subscribe<Observer: ObserverType>(_ observer: Observer) -> Disposable where Observer.Element == Element {
         self._lock.lock()
         let subscription = self._synchronized_subscribe(observer)
@@ -110,10 +112,12 @@ public final class PublishSubject<Element>
             return Disposables.create()
         }
         
+        //如果保存成功，则将该观察者以及对应的BagKey生成SubscriptionDisposable以便后续释放
         let key = self._observers.insert(observer.on)
         return SubscriptionDisposable(owner: self, key: key)
     }
 
+    //调用DisposeBag的deinit
     func synchronizedUnsubscribe(_ disposeKey: DisposeKey) {
         self._lock.lock()
         self._synchronized_unsubscribe(disposeKey)

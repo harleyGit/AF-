@@ -7,6 +7,7 @@
 //
 
 /// Represents a push style sequence.
+/// ObservableType是继承自ObservableConvertibleType协议，它在extension中实现了从可观察序列订阅事件处理方法
 public protocol ObservableType: ObservableConvertibleType {
     /**
     Subscribes `observer` to receive events for this sequence.
@@ -31,6 +32,7 @@ public protocol ObservableType: ObservableConvertibleType {
     
     - returns: Subscription for `observer` that can be used to cancel production of sequence elements and free resources.
     */
+    //subscribe方法参数需要是遵从ObserverType协议类型。
     func subscribe<Observer: ObserverType>(_ observer: Observer) -> Disposable where Observer.Element == Element
 }
 

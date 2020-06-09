@@ -61,6 +61,8 @@ final private class AnonymousObservableSink<Observer: ObserverType>: Sink<Observ
     }
 }
 
+///AnonymousObservable 是ObservableType类的扩展 Anonymous： 匿名
+///AnonymousObservable 继承自Producer, 拥有Producer的subscribe方法
 final private class AnonymousObservable<Element>: Producer<Element> {
     typealias SubscribeHandler = (AnyObserver<Element>) -> Disposable
 

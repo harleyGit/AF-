@@ -7,6 +7,7 @@
 //
 
 /// Represents a disposable resource.
+//Disposable也是声明的一个协议，用来表示资源释放
 public protocol Disposable {
     /// Dispose resource.
     func dispose()

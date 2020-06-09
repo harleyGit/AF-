@@ -22,6 +22,8 @@
 
  */
 
+///label.rx
+///label会传入这个base
 public struct Reactive<Base> {
     /// Base object to extend.
     public let base: Base
@@ -37,12 +39,16 @@ public struct Reactive<Base> {
 /// A type that has reactive extensions.
 public protocol ReactiveCompatible {
     /// Extended type
+    /// associatedtype： 协议关联类型
     associatedtype ReactiveBase
 
     @available(*, deprecated, renamed: "ReactiveBase")
     typealias CompatibleType = ReactiveBase
 
     /// Reactive extensions.
+    /// 元类型，此处为Reactive泛型并且用关联类型进行约束
+    ///{ get set } 表示该属性是可读与可写的属性
+    ///Class.Type : 获取这个类的元类型
     static var rx: Reactive<ReactiveBase>.Type { get set }
 
     /// Reactive extensions.
@@ -51,6 +57,7 @@ public protocol ReactiveCompatible {
 
 extension ReactiveCompatible {
     /// Reactive extensions.
+    //接口中使用的类型就是实现这个接口本身的类型的话，需要使用 Self 进行指代
     public static var rx: Reactive<Self>.Type {
         get {
             return Reactive<Self>.self
@@ -76,4 +83,10 @@ extension ReactiveCompatible {
 import class Foundation.NSObject
 
 /// Extend NSObject with `rx` proxy.
+///当我们输入label.rx时，实际上是因为NSObject遵从了ReactiveCompatible协议添加了命名空间
 extension NSObject: ReactiveCompatible { }
+
+
+
+
+

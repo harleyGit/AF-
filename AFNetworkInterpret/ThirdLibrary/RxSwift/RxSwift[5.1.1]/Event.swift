@@ -10,6 +10,7 @@
 ///
 /// Sequence grammar: 
 /// **next\* (error | completed)**
+/// Event表示序列事件，是一个泛型枚举
 public enum Event<Element> {
     /// Next element is produced.
     case next(Element)
@@ -21,8 +22,12 @@ public enum Event<Element> {
     case completed
 }
 
+///遵从了系统的CustomDebugStringConvertible协议，重写了debugDescription属性让其可以在debug模式下打印
+///CustomStringConvertible 和CustomDebugStringConvertible这两个协议类似于Objective-C中的重写description方法
+///继承协议 实现description 和 debugDescription 属性 即可打印出想要的数据内容
 extension Event: CustomDebugStringConvertible {
     /// Description of event.
+    /// 重写了打印Debug下的打印方法
     public var debugDescription: String {
         switch self {
         case .next(let value):
@@ -37,6 +42,7 @@ extension Event: CustomDebugStringConvertible {
 
 extension Event {
     /// Is `completed` or `error` event.
+    /// 是否是`completed` 或 `error`事件
     public var isStopEvent: Bool {
         switch self {
         case .next: return false
@@ -45,6 +51,7 @@ extension Event {
     }
 
     /// If `next` event, returns element value.
+    /// 返回`next`事件的元素
     public var element: Element? {
         if case .next(let value) = self {
             return value

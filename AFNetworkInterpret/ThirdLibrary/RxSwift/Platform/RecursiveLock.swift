@@ -30,5 +30,7 @@ import class Foundation.NSRecursiveLock
         }
     }
 #else
+    ///NSRecursiveLock：是一个递归锁，这个锁可以被同一线程多次请求，而不会引起死锁。它主要是用在循环或递归操作中
+    ///NSRecursiveLock：https://www.dazhuanlan.com/2019/11/08/5dc5838a41a22/
     typealias RecursiveLock = NSRecursiveLock
 #endif

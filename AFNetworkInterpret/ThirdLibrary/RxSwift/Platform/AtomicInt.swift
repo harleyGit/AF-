@@ -8,6 +8,7 @@
 
 import class Foundation.NSLock
 
+/// 继承自NSLock保证原子性
 final class AtomicInt: NSLock {
     fileprivate var value: Int32
     public init(_ value: Int32 = 0) {
@@ -16,7 +17,9 @@ final class AtomicInt: NSLock {
 }
 
 @discardableResult
-@inline(__always)
+@inline(__always)//总是被编译成inline的形式
+/// @inline(__always)：函数内联是一种编译器优化技术，它通过使用方法的内容替换直接调用该方法，就相当于假装该方法并不存在一样，这种做法在很大程度上优化了性能
+
 func add(_ this: AtomicInt, _ value: Int32) -> Int32 {
     this.lock()
     let oldValue = this.value

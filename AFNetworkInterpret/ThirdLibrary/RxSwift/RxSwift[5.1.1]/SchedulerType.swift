@@ -16,6 +16,7 @@ public typealias RxTimeInterval = DispatchTimeInterval
 public typealias RxTime = Date
 
 /// Represents an object that schedules units of work.
+///SchedulerType： 表示调度工作单元的对象，继承自ImmediateSchedulerType，内部包含立即执行的调度和周期调用的调度
 public protocol SchedulerType: ImmediateSchedulerType {
 
     /// - returns: Current time.
@@ -55,12 +56,14 @@ extension SchedulerType {
     - parameter period: Period for running the work periodically.
     - returns: The disposable object used to cancel the scheduled recurring action (best effort).
     */
+    ///使用递归调度模拟周期性任务
     public func schedulePeriodic<StateType>(_ state: StateType, startAfter: RxTimeInterval, period: RxTimeInterval, action: @escaping (StateType) -> StateType) -> Disposable {
         let schedule = SchedulePeriodicRecursive(scheduler: self, startAfter: startAfter, period: period, action: action, state: state)
             
         return schedule.start()
     }
 
+    /// SchedulePeriodicRecursive内部会调用到如下方法
     func scheduleRecursive<State>(_ state: State, dueTime: RxTimeInterval, action: @escaping (State, AnyRecursiveScheduler<State>) -> Void) -> Disposable {
         let scheduler = AnyRecursiveScheduler(scheduler: self, action: action)
          

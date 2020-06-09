@@ -26,6 +26,7 @@ extension ObservableType {
     }
 }
 
+//调用buffer方法会生成一个BufferTimeCount对象，把对应的缓存时间，缓存个数，调度以及当前Observable保存；当subscribe时，调用run方法生成BufferTimeCountSink
 final private class BufferTimeCount<Element>: Producer<[Element]> {
     
     fileprivate let _timeSpan: RxTimeInterval
@@ -84,6 +85,7 @@ final private class BufferTimeCountSink<Element, Observer: ObserverType>
         self.createTimer(windowID)
     }
     
+    //当调用onNext发送元素时调用
     func on(_ event: Event<Element>) {
         self.synchronizedOn(event)
     }
@@ -91,6 +93,7 @@ final private class BufferTimeCountSink<Element, Observer: ObserverType>
     func _synchronized_on(_ event: Event<Element>) {
         switch event {
         case .next(let element):
+            //元素添加到buffer数组中，并且当满足缓存个数时，发送
             self._buffer.append(element)
             
             if self._buffer.count == self._parent._count {
@@ -108,7 +111,9 @@ final private class BufferTimeCountSink<Element, Observer: ObserverType>
         }
     }
     
+    //当执行run方法时调用
     func createTimer(_ windowID: Int) {
+        //DisposeBase子类
         if self._timerD.isDisposed {
             return
         }
@@ -121,12 +126,15 @@ final private class BufferTimeCountSink<Element, Observer: ObserverType>
         
         self._timerD.disposable = nextTimer
 
+        //调度之后定时器执行
         let disposable = self._parent._scheduler.scheduleRelative(windowID, dueTime: self._parent._timeSpan) { previousWindowID in
             self._lock.performLocked {
+                //当前窗口与回调的滑动窗口id不同则返回
                 if previousWindowID != self._windowID {
                     return
                 }
              
+                //窗口id+1，调用self.forwardOn(.next(buffer))
                 self.startNewWindowAndSendCurrentOne()
             }
             

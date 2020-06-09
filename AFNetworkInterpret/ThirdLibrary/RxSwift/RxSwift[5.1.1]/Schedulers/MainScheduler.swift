@@ -56,11 +56,15 @@ public final class MainScheduler : SerialDispatchQueueScheduler {
         #endif
     }
 
+    //调度要立即执行的操作
     override func scheduleInternal<StateType>(_ state: StateType, action: @escaping (StateType) -> Disposable) -> Disposable {
+        //原子属性+1 相当于信号量
         let previousNumberEnqueued = increment(self.numberEnqueued)
 
+        //DispatchQueue.getSpecific(key: token) != nil 设置标识判断是否在主线程
         if DispatchQueue.isMain && previousNumberEnqueued == 0 {
             let disposable = action(state)
+            //原子属性-1
             decrement(self.numberEnqueued)
             return disposable
         }
