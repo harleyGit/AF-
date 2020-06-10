@@ -177,6 +177,8 @@ NSArray * AFQueryStringPairsFromKeyAndValue(NSString *key, id value) {
 
 #pragma mark -
 
+///这个函数就是封装了一些属性的名字，这些都是NSUrlRequest的属性
+/// 并且为这些数组中的元素添加了监听，也就是KVO
 static NSArray * AFHTTPRequestSerializerObservedKeyPaths() {
     static NSArray *_AFHTTPRequestSerializerObservedKeyPaths = nil;
     static dispatch_once_t onceToken;
@@ -382,6 +384,7 @@ forHTTPHeaderField:(NSString *)field
     
     //  将request的各种属性循环遍历
     //  AFHTTPRequestSerializerObservedKeyPaths()是一个c函数
+    // AFHTTPRequestSerializerObservedKeyPaths 返回一个数组，数组内是一些方法，对其进行了KVO监听在566行和256行
     for (NSString *keyPath in AFHTTPRequestSerializerObservedKeyPaths()) {
         //  如果自己观察到的发生变化的属性，在这些方法里
         if ([self.mutableObservedChangedKeyPaths containsObject:keyPath]) {

@@ -527,6 +527,10 @@ static NSString * const AFNSURLSessionTaskDidSuspendNotification = @"com.alamofi
 
     //  置空task关联的代理
     //  这个方法用来异步的获取当前session的所有未完成的task
+    /**
+     *在初始化中调用这个方法应该里面一个task都不会有。我们打断点去看，也确实如此，里面的数组都是空的
+     *原来这是为了防止后台回来，重新初始化这个session，一些之前的后台请求任务，导致程序的crash
+     */
     [self.session getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
         for (NSURLSessionDataTask *task in dataTasks) {
             [self addDelegateForDataTask:task uploadProgress:nil downloadProgress:nil completionHandler:nil];

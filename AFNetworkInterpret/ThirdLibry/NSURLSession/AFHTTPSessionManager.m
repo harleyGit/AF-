@@ -72,7 +72,7 @@
     }
 
     // Ensure terminal slash for baseURL path, so that NSURL +URLWithString:relativeToURL: works as expected
-    //对传过来的BaseUrl进行处理，截去url最后的/
+    //对传过来的BaseUrl进行处理，如果有值且最后不包含/，url加上"/"
     if ([[url path] length] > 0 && ![[url absoluteString] hasSuffix:@"/"]) {
         url = [url URLByAppendingPathComponent:@""];
     }
@@ -249,7 +249,7 @@
     return dataTask;
 }
 
-
+///AFHTTPSessionManager 方法
 - (NSURLSessionDataTask *)dataTaskWithHTTPMethod:(NSString *)method
                                        URLString:(NSString *)URLString
                                       parameters:(nullable id)parameters
