@@ -559,6 +559,10 @@ static NSString * const AFNSURLSessionTaskDidSuspendNotification = @"com.alamofi
     @synchronized (self) {
         if (!_session) {
             //注意代理，代理的继承，实际上NSURLSession去判断了，你实现了哪个方法会去调用，包括子代理的方法
+            /**
+             *self.operationQueue: 见 509 行
+             *self.sessionConfiguration： 见 503 行
+             */
             _session = [NSURLSession sessionWithConfiguration:self.sessionConfiguration delegate:self delegateQueue:self.operationQueue];
         }
     }
@@ -607,6 +611,10 @@ static NSString * const AFNSURLSessionTaskDidSuspendNotification = @"com.alamofi
     return delegate;
 }
 
+/**
+ *  这个方法主要就是把AF代理和task建立映射，存在了一个我们事先声明好的字典里
+ *  而要加锁的原因是因为本身我们这个字典属性是mutable的，是线程不安全的。
+ */
 - (void)setDelegate:(AFURLSessionManagerTaskDelegate *)delegate
             forTask:(NSURLSessionTask *)task
 {
@@ -1054,12 +1062,15 @@ didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
             @throw [NSException exceptionWithName:@"Invalid Return Value" reason:@"The return value from the authentication challenge handler must be nil, an NSError, an NSURLCredential or an NSNumber." userInfo:nil];
         }
     } else {
+        // 此处服务器要求客户端的接收认证挑战方法是NSURLAuthenticationMethodServerTrust
+        // 也就是说服务器端需要客户端返回一个根据认证挑战的保护空间提供的信任（即challenge.protectionSpace.serverTrust）产生的挑战证书。
         evaluateServerTrust = [challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
     }
 
     if (evaluateServerTrust) {
         // 基于客户端的安全策略来决定是否信任该服务器，不信任的话，也就没必要响应挑战
         if ([self.securityPolicy evaluateServerTrust:challenge.protectionSpace.serverTrust forDomain:challenge.protectionSpace.host]) {
+             //证书挑战
             disposition = NSURLSessionAuthChallengeUseCredential;
             // 创建挑战证书（注：挑战方式为UseCredential和PerformDefaultHandling都需要新建挑战证书）
             credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
@@ -1067,10 +1078,12 @@ didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
             objc_setAssociatedObject(task, AuthenticationChallengeErrorKey,
                                      [self serverTrustErrorForServerTrust:challenge.protectionSpace.serverTrust url:task.currentRequest.URL],
                                      OBJC_ASSOCIATION_RETAIN);
+            //默认挑战
             disposition = NSURLSessionAuthChallengeCancelAuthenticationChallenge;
         }
     }
 
+    //完成挑战
     if (completionHandler) {
         completionHandler(disposition, credential);
     }
@@ -1260,6 +1273,7 @@ didBecomeDownloadTask:(NSURLSessionDownloadTask *)downloadTask
 }
 
 #if !TARGET_OS_OSX
+//当session中所有已经入队的消息被发送出去后，会调用该代理方法
 - (void)URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *)session {
     if (self.didFinishEventsForBackgroundURLSession) {
         dispatch_async(dispatch_get_main_queue(), ^{
