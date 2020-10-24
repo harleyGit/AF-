@@ -27,7 +27,7 @@ typedef NS_ENUM(NSUInteger, AFSSLPinningMode) {
     AFSSLPinningModeNone,
     //只验证公钥
     AFSSLPinningModePublicKey,
-     //验证证书
+    // 验证证书所有字段，包括有效期之内
     AFSSLPinningModeCertificate,
 };
 
